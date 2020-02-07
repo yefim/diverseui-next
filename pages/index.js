@@ -47,12 +47,17 @@ const IndexPage = ({images}) => {
           ))
         }
       </div>
+      <footer className="flex">
+        <p>&copy; Diverse UI 2020 | Terms of Service</p>
+        <p>Made with 💖 and ☕️ in San Francisco by Renee and Yefim.</p>
+      </footer>
       <style jsx>{`
         .index-page {
           display: grid;
           grid-template:
             "header  header"
             "sidebar images"
+            "footer footer"
         }
 
         header {
@@ -65,6 +70,10 @@ const IndexPage = ({images}) => {
 
         .images {
           grid-area: images;
+        }
+
+        footer {
+          grid-area: footer;
         }
       `}</style>
     </div>
