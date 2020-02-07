@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import fetch from 'isomorphic-unfetch';
 
+import Image from '../components/image';
+
 const IndexPage = ({images}) => {
   const [selected, setSelected] = useState(new Set());
   const [size, setSize] = useState(78);
@@ -31,17 +33,40 @@ const IndexPage = ({images}) => {
       <div className="images">
         {
           images.map((image, i) => (
-            <button
+            <Image
               key={i}
+              size={size}
+              selected={selected.has(image)}
+              {...image}
               onClick={() => {
                 const newSelected = new Set(selected);
                 newSelected.delete(image) || newSelected.add(image);
                 setSelected(newSelected);
               }}
-            >{image}</button>
+            />
           ))
         }
       </div>
+      <style jsx>{`
+        .index-page {
+          display: grid;
+          grid-template:
+            "header  header"
+            "sidebar images"
+        }
+
+        header {
+          grid-area: header;
+        }
+
+        .sidebar {
+          grid-area: sidebar;
+        }
+
+        .images {
+          grid-area: images;
+        }
+      `}</style>
     </div>
   );
 };
@@ -50,8 +75,9 @@ IndexPage.getInitialProps = async () => {
   // const res = await fetch('https://api.github.com/repos/zeit/next.js');
   // const json = await res.json();
   // return {photos: json.stargazers_count};
+  const data = '[{"gender":"female","url":"female-72.jpg"},{"gender":"male","url":"male-72.png"},{"gender":"male","url":"male-70.JPG"},{"gender":"male","url":"male-47.jpg"},{"gender":"female","url":"female-38.jpg"}]';
   return {
-    images: ['bob', 'joe', 'darn']
+    images: JSON.parse(data)
   };
 }
 
