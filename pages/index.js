@@ -9,13 +9,7 @@ const IndexPage = ({images}) => {
   const [sex, setSex] = useState('neutral');
 
   return (
-    <div className="index-page">
-      <header className="flex">
-        <div className="flex-grow">Diverse UI</div>
-        <div>About</div>
-        <div>Sketch Plugin</div>
-        <div>Submit</div>
-      </header>
+    <>
       <div className="sidebar">
         <div>slider at {size}</div>
         <label>
@@ -47,36 +41,7 @@ const IndexPage = ({images}) => {
           ))
         }
       </div>
-      <footer className="flex">
-        <p>&copy; Diverse UI 2020 | Terms of Service</p>
-        <p>Made with 💖 and ☕️ in San Francisco by Renee and Yefim.</p>
-      </footer>
-      <style jsx>{`
-        .index-page {
-          display: grid;
-          grid-template:
-            "header  header"
-            "sidebar images"
-            "footer footer"
-        }
-
-        header {
-          grid-area: header;
-        }
-
-        .sidebar {
-          grid-area: sidebar;
-        }
-
-        .images {
-          grid-area: images;
-        }
-
-        footer {
-          grid-area: footer;
-        }
-      `}</style>
-    </div>
+    </>
   );
 };
 
