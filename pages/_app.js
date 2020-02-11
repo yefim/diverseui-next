@@ -1,5 +1,4 @@
 import React from 'react';
-import App from 'next/app';
 import Layout from '../components/layout';
 
 import '../css/tailwind.css';
