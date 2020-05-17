@@ -1,11 +1,17 @@
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 const Layout = (props) => {
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
+
   // Default to logged out state for SSR
   let headerLinks = (<Link href="/submit"><a>Submit</a></Link>);
 
-  if (typeof window !== 'undefined' &&
-      window.document.cookie.indexOf('isLoggedIn') !== -1) {
+  if (isClient && window.document.cookie.indexOf('isLoggedIn') !== -1) {
     headerLinks = (
       <>
         <Link href="/review"><a>Review Photo</a></Link>
