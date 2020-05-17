@@ -22,8 +22,10 @@ const Layout = (props) => {
 
   return (
     <>
-      <header className="flex">
-        <div className="flex-grow">Diverse UI</div>
+      <header className="flex h-12 items-center border-b border-black">
+        <div className="flex-grow">
+          <Link href="/"><a>Diverse UI</a></Link>
+        </div>
         <Link href="/about"><a>About</a></Link>
         <a href="https://github.com/reneepadgham/diverseui-sketch-plugin#readme">Sketch Plugin</a>
         {headerLinks}
