@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 
+const Button = ({children}) => (
+  <Link href="/submit">
+    <a className="px-8 py-2 bg-red-500 text-white rounded-md" style={{boxShadow: '0 4px 0 #d14952'}}>
+      {children}
+    </a>
+  </Link>
+);
+
 const Layout = (props) => {
   const [isClient, setIsClient] = useState(false)
 
@@ -9,7 +17,7 @@ const Layout = (props) => {
   }, [])
 
   // Default to logged out state for SSR
-  let headerLinks = (<Link href="/submit"><a>Submit</a></Link>);
+  let headerLinks = (<Button>Submit</Button>);
 
   if (isClient && window.document.cookie.indexOf('isLoggedIn') !== -1) {
     headerLinks = (
