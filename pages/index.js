@@ -1,21 +1,36 @@
 import { useState } from 'react';
+import { useEntity, useTransact } from 'homebase-react'
 import fetch from 'isomorphic-unfetch';
 
 import Image from '../components/image';
 
 const IndexPage = ({images}) => {
-  const [selected, setSelected] = useState(new Set());
-  const [size, setSize] = useState(78);
-  const [sex, setSex] = useState('neutral');
+  const [userPreferences] = useEntity(1);
+  const [transact] = useTransact();
+
+  const gender = userPreferences.get('gender');
+  const size = userPreferences.get('size');
+  const selected = userPreferences.get('selected');
 
   return (
     <>
       <div className="sidebar">
         <div>slider at {size}</div>
         <label>
-          Sex
-          <select value={sex} onChange={(e) => setSex(e.target.value)}>
-            <option value="neutral">Neutral</option>
+          Gender
+          <select
+              value={gender}
+              onChange={(e) => {
+                transact([
+                  {
+                    userPreferences: {
+                      id: 1,
+                      gender: e.target.value,
+                    }
+                  }
+                ]);
+              }}>
+            <option value="everyone">Everyone</option>
             <option value="female">Female</option>
             <option value="male">Male</option>
           </select>
@@ -35,7 +50,14 @@ const IndexPage = ({images}) => {
               onClick={() => {
                 const newSelected = new Set(selected);
                 newSelected.delete(image) || newSelected.add(image);
-                setSelected(newSelected);
+                transact([
+                  {
+                    userPreferences: {
+                      id: 1,
+                      selected: newSelected,
+                    }
+                  }
+                ]);
               }}
             />
           ))
